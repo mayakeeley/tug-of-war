@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tug of War</title>
+  <style>
+    body {
+      background-color: rgb(70, 0, 128);
+      font-family: sans-serif;
+      color: white;
+      font-weight: bold;
+    }
+
+    #rope {
+      position: absolute;
+      background-color: rgb(70, 0, 128);
+      top: 50vh;
+      height: 10vh;
+      width: 10vw;
+      left: 45vw;
+    }
+    
+    #container {
+      border: 4px solid black;
+      width: 80vw;
+      height: 50vh;
+      margin: auto;
+      background-color: white;
+    }
+
+    h1 {
+      text-align: center;
+      text-decoration: underline;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      background-color: white;
+      border: 4px solid black;
+      padding: 10px 20px;
+      font-weight: bold;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tug of War</h1>
+  <section class="flex">
+    <p>Player 1: press left arrow</p>
+    <p>Player 2: press right arrow</p>
+  </section>
+  <section class="flex">
+    <p id="counter-1"></p>
+    <p id="counter-2"></p>
+  </section>
+  <section id="container">
+    <div id="rope"></div>
+  </section>
+  <button id="reset" onclick="reset()">New Game!</button>
+  <script>
+    document.addEventListener("keydown", move)
+    const rope = document.getElementById("rope");
+    let moveElement = 45;
+    let counter1 = 0;
+    let counter2 = 0;
+    function move(event) {
+      if (event.keyCode == "39") {
+        moveElement = moveElement + 1;
+        rope.style.left = moveElement + "vw";
+      } else if (event.keyCode == "37") {
+        moveElement = moveElement - 1;
+        rope.style.left = moveElement + "vw";
+      }
+      if(moveElement <= 9) {
+        alert("Congratulations, player 1 has won");
+        counter1 = counter1 + 1;
+        document.getElementById("counter-1").innerHTML = `Player 1 wins: ${counter1}`
+
+      } else if(moveElement >= 81) {
+        alert("Congratulations, player 2 has won")
+        counter2 = counter2 + 1;
+        document.getElementById("counter-2").innerHTML = `Player 2 wins: ${counter2}`
+      }
+    }
+    function reset() {
+      moveElement = 45;
+      rope.style.left = "45vw";
+    }
+    document.getElementById("counter-1").innerHTML = `Player 1 wins: ${counter1}`
+    document.getElementById("counter-2").innerHTML = `Player 2 wins: ${counter1}`
+  </script>
+</body>
+</html>
